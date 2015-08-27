@@ -40,9 +40,9 @@ int backrow(int n, double A[][nmax], double b[], int trans) {
 		for (j = n - 1; j >= 0; j --) {
 			if (A[j][j] < E && A[j][j] > -E) /* == 0 */
 				return -1;
-			for (i = j + 1; i < n; i ++)
-				b[j] -= A[j][i]*b[i];
 			b[j] = b[j]/A[j][j];
+			for (i = 0; i < j; i ++)
+				b[i] -= A[j][i]*b[j];
 		}
 	}
 	else { /* trans == 0 */
@@ -141,7 +141,7 @@ int main() {
 	backrow(n, A, b, 1);
 	for (i = 0; i < n; i ++) {
 		if (b[i] - (1 + i%(n/100)) > E || b[i] - (1 + i%(n/100)) < -E)
-			printf("Erro!\n");
+			printf("Erro! %d\n", i);
 	}
 	printf("Fim da Análise!\n");
 	return 0;
