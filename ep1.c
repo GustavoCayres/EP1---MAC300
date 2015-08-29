@@ -61,15 +61,14 @@ int backrow(int n, double A[][nmax], double b[], int trans) {
 int cholcol(int n, double A[][nmax]) {
 	int i, j, k;
 	for (i = 0; i < n; i ++) {
-		for (k = 0; k < i; k ++)
-			A[i][i] -= A[i][k]*A[i][k];
 		if (A[i][i] < E) /* <= 0 */
 			return -1;
 		A[i][i] = sqrt(A[i][i]);
 		for (j = i + 1; j < n; j ++) {
-			for (k = 0; k < i; k ++)
-				A[j][i] -= A[i][k]*A[j][k];
 			A[j][i] = A[j][i]/A[i][i];
+			A[j][j] -= A[j][i]*A[j][i];
+			for (k = i + 1; k < j; k++)
+				A[j][k] -= A[j][i]*A[k][i];
 		}
 	}
 	return 0;
