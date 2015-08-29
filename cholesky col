@@ -7,7 +7,7 @@ int cholcol(int n, double A[][nmax]) {
 		for (j = i + 1; j < n; j ++) {
 			A[j][i] = A[j][i]/A[i][i];
 			A[j][j] -= A[j][i]*A[j][i];
-			for (k = i + i; k < j; k++)
+			for (k = i + 1; k < j; k++)
 				A[j][k] -= A[j][i]*A[k][i];
 		}
 	}
