@@ -8,7 +8,7 @@ int cholcol(int n, double A[][nmax]) {
 		A[i][i] = sqrt(A[i][i]);
 		for (j = i - 1; j >= 0; j --) {
 			for (k = 0; k < i; k ++)
-				A[j][i] -= A[k][i]*A[k][j];
+				A[i][j] -= A[k][i]*A[k][j];
 			A[i][j] = A[i][j]/A[i][i];
 		}
 	}
