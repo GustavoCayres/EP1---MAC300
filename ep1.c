@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <time.h>
 #define nmax 700
 #define E 0.0001 /*erro*/
 
@@ -112,8 +113,9 @@ int backcol(int n, double A[][nmax], double b[], int trans) {
 int main() {
 	char file_name[100];
 	FILE *file;
-	double A[nmax][nmax], b[nmax];
+	double A[nmax][nmax], b[nmax], duration;
 	int n, i, j, k;
+	clock_t start, end;
 
 	printf("Nome do Arquivo: ");
 	scanf("%s", file_name);
@@ -133,15 +135,27 @@ int main() {
 		fscanf(file, "%lf", &b[i]);
 	}
 	/* TESTE */
-	cholrow(n, A);
-	forwrow(n, A, b);
+	start = clock();
+	cholcol(n, A);
+	end = clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	printf("Choleskyrow tempo %e segundos\n", duration);
+	start = clock();
+	forwcol(n, A, b);
+	end = clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	printf("Forwrow tempo %e segundos\n", duration);
 	/*for (i = 0; i < n; i++)
 		for (j = 0; j< n; j++)
 			A[i][j] = A[j][i];*/
-	backrow(n, A, b, 1);
+	start = clock();
+	backcol(n, A, b, 1);
+	end = clock();
+	duration = (double)(end - start) / CLOCKS_PER_SEC;
+	printf("Backrow tempo %e segundos\n", duration);
 	for (i = 0; i < n; i ++) {
 		if (b[i] - (1 + i%(n/100)) > E || b[i] - (1 + i%(n/100)) < -E)
-			printf("Erro! %d\n", i);
+			printf("Erro! %e  %d %d\n", b[i],-(1 + i%(n/100)), i);
 	}
 	printf("Fim da Análise!\n");
 	return 0;
