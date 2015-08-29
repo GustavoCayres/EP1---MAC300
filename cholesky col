@@ -1,0 +1,16 @@
+int cholcol(int n, double A[][nmax]) {
+	int i, j, k;
+	for (i = n-1; i >= 0; i --) {
+		for (k = i; k < n; k ++)
+			A[i][i] -= A[i][k]*A[i][k];
+		if (A[i][i] < E) /* <= 0 */
+			return -1;
+		A[i][i] = sqrt(A[i][i]);
+		for (j = i - 1; j >= 0; j --) {
+			for (k = 0; k < i; k ++)
+				A[j][i] -= A[k][i]*A[k][j];
+			A[i][j] = A[i][j]/A[i][i];
+		}
+	}
+	return 0;
+}
