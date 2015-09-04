@@ -79,7 +79,7 @@ int main() {
 	}
 
 	start = clock();
-	if (!lucol(n, A, p)) {
+	if (lucol(n, A, p) == -1) {
 		printf("Matriz é singular.\n");
 		return -1;
 	}
