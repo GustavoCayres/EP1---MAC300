@@ -90,7 +90,7 @@ int main() {
 	}
 
 	start = clock();
-	if (!cholrow(n, A)) {
+	if (cholrow(n, A) == -1) {
 		printf("Matriz não é definida positiva.\n");
 		return -1;
 	}
@@ -98,7 +98,7 @@ int main() {
 	duration = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("Choleskyrow tempo %e segundos\n", duration);
 	start = clock();
-	if (!forwrow(n, A, b)) {
+	if (forwrow(n, A, b) == -1) {
 		printf("Matriz é singular.\n");
 		return -1;
 	}
@@ -109,7 +109,7 @@ int main() {
 		for (j = 0; j < i; j++)
 			swap(&A[i][j], &A[j][i]);*/
 	start = clock();
-	if (!backrow(n, A, b, 1)) {
+	if (backrow(n, A, b, 1) == -1) {
 		printf("Matriz é singular.\n");
 		return -1;
 	}
