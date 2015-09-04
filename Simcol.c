@@ -88,7 +88,7 @@ int main() {
 	}
 	/* TESTE */
 	start = clock();
-	if (!cholcol(n, A)) {
+	if (cholcol(n, A) == -1) {
 		printf("Matriz não é definida positiva.\n");
 		return -1;
 	}
@@ -96,7 +96,7 @@ int main() {
 	duration = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("Choleskycol tempo %e segundos\n", duration);
 	start = clock();
-	if (!forwcol(n, A, b)) {
+	if (forwcol(n, A, b) == -1) {
 		printf("Matriz é singular.\n");
 		return -1;
 	}
@@ -107,7 +107,7 @@ int main() {
 		for (j = 0; j < i; j++)
 			swap(&A[i][j], &A[j][i]);*/
 	start = clock();
-	if (!backcol(n, A, b, 1)) {
+	if (backcol(n, A, b, 1) == -1) {
 		printf("Matriz é singular.\n");
 		return -1;
 	}
